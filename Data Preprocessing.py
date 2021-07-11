@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing Dataset
-dataset = pd.read_csv('/Users/shivamaditya/Desktop/[Tutsgalaxy.com] - Machine Learning A-Z™ Hands-On Python & R In Data Science/additional files/P14-Part1-Data-Preprocessing/Section 3 - Data Preprocessing in Python/Python/Data.csv')
+dataset = pd.read_csv('Data.csv')
 X = dataset.iloc[:, :-1].values
 #print(X)
 Y = dataset.iloc[:, -1].values
@@ -26,7 +26,7 @@ X[:, 1:3] = imputer.transform(X[:, 1:3])
 # Categorical Data Encoding
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder # for dummy encoding
 from sklearn.compose import ColumnTransformer
-# Country Column
+# For a Perticular Column
 # Simple Encoding
 labelencoder_X = LabelEncoder()
 X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
@@ -35,12 +35,13 @@ X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
 ct = ColumnTransformer([("Country", OneHotEncoder(), [0])], remainder = 'passthrough')
 X = ct.fit_transform(X)
 #print(X)
-# Purchased column(Yes/No)
+# column(Yes/No)
 # In binary categorical data we can apply just simple encoding
 from sklearn.preprocessing import LabelEncoder
 labelencoder_Y = LabelEncoder()
 Y[:] = labelencoder_Y.fit_transform(Y[:])
 #print(Y)
+# NOTE : Always handle the dummy variable trap in case of dummy encoding.
 
 # Splitting dataset into train set and test set
 from sklearn.model_selection import train_test_split # module for efficient splitting(we don't have to do it manually)
